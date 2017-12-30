@@ -61,7 +61,7 @@ var backgroundUtility = function () {
                             APIUtility.checkStatus(websiteList, true),
                             APIUtility.checkStatus(DBList, true),
                             APIUtility.checkStatus(serverList, true)
-                        ]).then(function (values) {
+                        ]).then(function () {
                             notificationUtility.checkPendingNotifications();
                             updateSettings();
                         }).catch(function (error) {
@@ -92,6 +92,7 @@ var backgroundUtility = function () {
         var dateTime = new Date(settingsObj.lastRunAt);
         settingsObj.nextRunAt = new Date(dateTime.setMinutes(dateTime.getMinutes() + parseInt(settingsObj.interval)));
         localStorageUtility.updateItem("settings", settingsObj);
+        updateInterval();
     }
 
     return {
